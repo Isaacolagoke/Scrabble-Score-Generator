@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scrabble</title>
+
+    <style>
+    body{
+        text-align: center;
+    }
+    fieldset{
+        padding: 50px 40px;
+        width: 400px;
+        height: 180px;
+        text-align: center;
+        box-shadow: 5px 5px 5px #aaaaaa;
+        border-radius: 10px;
+
+    }
+    
+    input{
+        height: 25px;
+        width: 300px;
+        border-radius: 5px;
+        border-color: cornflowerblue;
+        padding: 0px 10px;
+        margin-top: 10px;
+    }
+    button{
+        height: 30px;
+        width: 200px;
+        border-radius: 5px;
+        margin-top: 5px;
+        padding: 0px;
+        color: #fff;
+        background-color: mediumslateblue;
+    }
+
+    button:hover{
+        color: #fff;
+        background-color:  cornflowerblue
+    }
+    .result{
+        
+        margin-top: 20px;
+        text-align: center;
+    
+    }
+    
+    </style>
+    
+</head>
+<body>
+    
+        <fieldset>
+            <p>Please enter your preferred word then press <b>submit</b> to get the Scrabble score</p>
+            <legend>Scrabble</legend>
+
+            <form>
+            <input type="text" id="getInput" placeholder="Enter input here">
+            </form>
+            <br>
+            <button type="submit" onclick="processResult()">Submit</button>
+            
+            <div class="result">
+                <p><span id="displayResult"></span></p>
+            </div> 
+        </fieldset>
+        
+    
+
+<script type="text/javascript">
+
+
+function processResult () {
+//Get element from DOM
+var word = document.getElementById('getInput').value.toUpperCase();
+console.log(word);
+
+
+//Map letters as keys and assign values
+scores = { 'A': 1, 
+'E' : 1, 
+'I' : 1,
+'O' : 1,
+'U' : 1,
+'L' : 1,
+'N' : 1,
+'R' : 1,
+'S' : 1,
+'T' : 1,
+'D' : 2, 
+'G' : 2,
+'B' : 3,
+'C' : 3,
+'M' : 3,
+'P' : 3,
+'F' : 4, 
+'H' : 4,
+'V' : 4,
+'W' : 4,
+'Y' : 4,
+'K' : 5, 
+'J' : 6,
+'X' : 5, 
+'Q' : 10,
+'Z' : 10 };
+
+//Define sum and letters as keys
+var sum = 0,
+    letter = '';
+   
+//Use a for each to loop through the word
+for (var i = 0; i < word.length; i++) {
+    letter = word[i];
+    sum += scores[letter];
+}
+
+if(sum > 0){
+    document.getElementById("displayResult").innerHTML=`${word} is worth ${sum}` 
+}
+//output the result into the DOM using template literals
+
+};
+
+//Listen to the Keypress event and restrict input to lower and uppercase alphabets
+
+document.getElementById('getInput').onkeypress=function(e){
+
+    if(("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").indexOf(String.fromCharCode(e.keyCode))===-1){
+        e.preventDefault();
+        return false;
+    }
+
+}
+
+
+</script>
+</body>
+</html>
+
